@@ -1,0 +1,8 @@
+.card {
+  width: 240px;
+  height: fit-content;
+}
+
+.cardAvatar {
+  text-align: center;
+}

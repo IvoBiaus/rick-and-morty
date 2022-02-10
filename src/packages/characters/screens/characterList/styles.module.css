@@ -1,0 +1,27 @@
+.mainContainer {
+  height: 100%;
+}
+
+.header {
+  text-align: center;
+}
+
+.headerLogo {
+  height: 100%;
+}
+
+.content {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  overflow-x: auto;
+  padding: 24px;
+}
+
+.characters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  justify-content: center;
+  margin: 24px 16px;
+}
