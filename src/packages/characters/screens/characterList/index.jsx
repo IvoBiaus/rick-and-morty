@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Layout, Pagination, Button, Card, Select, Input } from "antd";
+import { Layout, Pagination, Button, Card } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
@@ -11,12 +11,11 @@ import Header from "../../components/Header";
 import useOnScreen from "../../../utils/hooks/useOnScreen";
 
 import CardsSkeleton from "./components/CardsSkeleton";
-import styles from "./styles.module.css";
+import styles from "./styles.module.scss";
+import Sidebar from "./components/Sidebar";
 
-const { Sider, Content } = Layout;
+const { Content } = Layout;
 const { Meta } = Card;
-const { Option } = Select;
-const { Search } = Input;
 
 function CharacterList() {
   const navigate = useNavigate();
@@ -24,8 +23,8 @@ function CharacterList() {
   const topRef = useRef();
   const isVisible = useOnScreen(topRef);
   const { data, status, info } = useSelector(selectCharacters);
-  const [isCollapsed, setIsCollapsed] = useState(false);
   const [filters, setFilters] = useState({});
+  const [isDrawerVisible, setIsDrawerVisible] = useState(false);
 
   const handleFetchPage = (page) => {
     dispatch(fetchByPage({ page, filters }));
@@ -57,41 +56,26 @@ function CharacterList() {
     topRef.current.scrollIntoView({ behavior: "smooth" });
   };
 
+  const hideDrawer = () => {
+    setIsDrawerVisible(false);
+  };
+
   useEffect(() => {
-    console.log("effect b");
     dispatch(fetchByPage({ page: 1 }));
   }, [dispatch]);
 
   return (
     <Layout className={styles.mainContainer}>
-      <Header setCollapse={setIsCollapsed} isCollapsed={isCollapsed} />
+      <Sidebar
+        isVisible={isDrawerVisible}
+        onClose={hideDrawer}
+        onGenderChange={handleGenderFilter}
+        onNameChange={handleNameFilter}
+        onStatusChange={handleStatusFilter}
+      />
       <Layout>
-        <Sider trigger={null} collapsible collapsed={isCollapsed}>
-          <div className={styles.filtersContainer}>
-            <h2 className={styles.filtersTitle}>Filters</h2>
-            <Search placeholder="Name" allowClear onSearch={handleNameFilter} />
-            <br />
-            <Select
-              allowClear
-              placeholder="Status"
-              onChange={handleStatusFilter}
-            >
-              <Option value="unknown">Unknown</Option>
-              <Option value="alive">Alive</Option>
-              <Option value="dead">Dead</Option>
-            </Select>
-            <br />
-            <Select
-              allowClear
-              placeholder="Gender"
-              onChange={handleGenderFilter}
-            >
-              <Option value="unknown">Unknown</Option>
-              <Option value="male">Male</Option>
-              <Option value="female">Female</Option>
-            </Select>
-          </div>
-        </Sider>
+        <Header setVisible={setIsDrawerVisible} isVisible={isDrawerVisible} />
+
         <Content className={styles.content}>
           <div ref={topRef} />
           <div className={styles.characters}>

@@ -19,7 +19,6 @@ function CharacterDetail() {
   const { data, status } = useSelector(selectCharacters);
 
   useEffect(() => {
-    console.log("effect A");
     dispatch(fetchById(characterId));
   }, [dispatch, characterId]);
 

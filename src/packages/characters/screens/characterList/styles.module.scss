@@ -1,15 +1,7 @@
+$mobile-breakpoint: 800px;
+
 .mainContainer {
   height: 100%;
-}
-
-.filtersContainer {
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-}
-
-.filtersTitle {
-  color: white;
 }
 
 .content {

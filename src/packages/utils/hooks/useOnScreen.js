@@ -8,8 +8,6 @@ const useOnScreen = (ref) => {
   );
 
   useEffect(() => {
-    console.log("effect c");
-
     observer.observe(ref.current);
     // Remove the observer as soon as the component is unmounted
     return () => {

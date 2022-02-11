@@ -6,10 +6,10 @@ import { MenuUnfoldOutlined, MenuFoldOutlined } from "@ant-design/icons";
 
 import banner from "../../../../assets/banner.png";
 
-import styles from "./styles.module.css";
+import styles from "./styles.module.scss";
 import { PATHS } from "../../constants";
 
-function Header({ setCollapse = null, isCollapsed = false }) {
+function Header({ setVisible = null, isVisible = false }) {
   const navigate = useNavigate();
 
   const redirectToCharacters = () => {
@@ -18,18 +18,24 @@ function Header({ setCollapse = null, isCollapsed = false }) {
 
   return (
     <Layout.Header className={styles.header}>
+      {setVisible &&
+        (isVisible ? (
+          <MenuUnfoldOutlined
+            className={styles.collapseButton}
+            onClick={() => setVisible(false)}
+          />
+        ) : (
+          <MenuFoldOutlined
+            className={styles.collapseButton}
+            onClick={() => setVisible(true)}
+          />
+        ))}
       <img
         onClick={redirectToCharacters}
         alt="Rick and Morty Banner"
         src={banner}
         className={styles.headerLogo}
       />
-      {setCollapse &&
-        (isCollapsed ? (
-          <MenuUnfoldOutlined onClick={() => setCollapse(false)} />
-        ) : (
-          <MenuFoldOutlined onClick={() => setCollapse(true)} />
-        ))}
     </Layout.Header>
   );
 }

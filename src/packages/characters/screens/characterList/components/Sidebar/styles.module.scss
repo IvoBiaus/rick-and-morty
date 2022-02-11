@@ -1,0 +1,43 @@
+$mobile-breakpoint: 800px;
+
+.sidebar {
+  background: #123456;
+}
+
+.drawer {
+  :global .ant-drawer-content-wrapper {
+    width: 70% !important;
+  }
+}
+
+.filtersContainer {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.filtersTitle {
+  color: white;
+}
+
+.desktop {
+  display: initial;
+}
+
+.mobile {
+  display: none;
+}
+
+@media screen and (max-width: $mobile-breakpoint) {
+  .desktop {
+    display: none;
+  }
+
+  .mobile {
+    display: initial;
+  }
+
+  .filtersContainer {
+    padding: 0;
+  }
+}
