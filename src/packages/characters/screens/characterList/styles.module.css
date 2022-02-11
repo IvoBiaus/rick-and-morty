@@ -2,6 +2,16 @@
   height: 100%;
 }
 
+.filtersContainer {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.filtersTitle {
+  color: white;
+}
+
 .content {
   align-items: center;
   display: flex;

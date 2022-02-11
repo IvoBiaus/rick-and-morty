@@ -21,8 +21,8 @@ const initialState = {
 
 export const fetchByPage = createAsyncThunk(
   "characters/fetchByPageStatus",
-  async (page) => {
-    const response = await fetchPage(page);
+  async ({ page, filters = {} }) => {
+    const response = await fetchPage(page, filters);
     return response;
   }
 );

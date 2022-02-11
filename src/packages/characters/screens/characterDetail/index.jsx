@@ -5,8 +5,9 @@ import { useParams } from "react-router-dom";
 import moment from "moment";
 
 import { fetchById, selectCharacters, STATE } from "../../redux";
-import styles from "./styles.module.css";
 import Header from "../../components/Header";
+
+import styles from "./styles.module.css";
 import DetailsSkeleton from "./components/DetailsSkeleton";
 
 const { TabPane } = Tabs;
@@ -18,8 +19,9 @@ function CharacterDetail() {
   const { data, status } = useSelector(selectCharacters);
 
   useEffect(() => {
+    console.log("effect A");
     dispatch(fetchById(characterId));
-  }, [dispatch]);
+  }, [dispatch, characterId]);
 
   return (
     <Layout className={styles.mainContainer}>

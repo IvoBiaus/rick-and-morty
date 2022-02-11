@@ -1,8 +1,12 @@
 const API_BASE_URL = "https://rickandmortyapi.com/api";
 
-export const fetchPage = async (page) => {
-  return fetch(`${API_BASE_URL}/character/?page=${page}`).then((res) =>
-    res.json()
+export const fetchPage = async (page, filters = {}) => {
+  const filtersString = Object.keys(filters)
+    .map((key) => `&${key}=${filters[key]}`)
+    .join("");
+
+  return fetch(`${API_BASE_URL}/character/?page=${page}${filtersString}`).then(
+    (res) => res.json()
   );
 };
 
