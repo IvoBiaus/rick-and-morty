@@ -1,22 +1,31 @@
 import React, { useEffect } from "react";
-import { Layout, Tabs, Card } from "antd";
+import { Layout, Tabs, Card, Button } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import moment from "moment";
+import { useNavigate } from "react-router-dom";
+
+import { ArrowLeftOutlined } from "@ant-design/icons";
 
 import { fetchById, selectCharacters, STATE } from "../../redux";
 import Header from "../../components/Header";
+import { PATHS } from "../../constants";
 
-import styles from "./styles.module.css";
+import styles from "./styles.module.scss";
 import DetailsSkeleton from "./components/DetailsSkeleton";
 
 const { TabPane } = Tabs;
 const { Content } = Layout;
 
 function CharacterDetail() {
+  const navigate = useNavigate();
   let { characterId } = useParams();
   const dispatch = useDispatch();
   const { data, status } = useSelector(selectCharacters);
+
+  const redirectToCharacters = () => {
+    navigate(PATHS.BASE_URL);
+  };
 
   useEffect(() => {
     dispatch(fetchById(characterId));
@@ -26,6 +35,15 @@ function CharacterDetail() {
     <Layout className={styles.mainContainer}>
       <Header />
       <Content className={styles.content}>
+        <Button
+          type="primary"
+          shape="round"
+          className={styles.backButton}
+          onClick={redirectToCharacters}
+          icon={<ArrowLeftOutlined />}
+        >
+          Go back
+        </Button>
         {status === STATE.LOADING && <DetailsSkeleton />}
         {status === STATE.IDLE && !!data?.id && (
           <>

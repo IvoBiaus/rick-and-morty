@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
+
 import "antd/dist/antd.min.css";
 
 import "./index.css";
@@ -10,7 +11,6 @@ import { store } from "./appRedux";
 import * as serviceWorker from "./serviceWorker";
 
 ReactDOM.render(
-  /* Maybe remove React.StrictMode if not needed */
   <React.StrictMode>
     <Provider store={store}>
       <BrowserRouter>

@@ -1,3 +1,5 @@
+$mobile-breakpoint: 800px;
+
 .mainContainer {
   height: 100%;
 }
@@ -8,6 +10,11 @@
   flex-direction: column;
   overflow-x: auto;
   padding: 24px;
+}
+
+.backButton {
+  position: absolute;
+  left: 30px;
 }
 
 .info {
@@ -51,4 +58,15 @@
 .infoData span span,
 .tabContent span span {
   color: rgb(24, 144, 255);
+}
+
+@media screen and (max-width: $mobile-breakpoint) {
+  .info {
+    flex-direction: column;
+  }
+
+  .infoData {
+    margin-left: 0;
+    margin-top: 20px;
+  }
 }

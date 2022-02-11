@@ -4,10 +4,10 @@ import { useNavigate } from "react-router-dom";
 
 import { MenuUnfoldOutlined, MenuFoldOutlined } from "@ant-design/icons";
 
+import { PATHS } from "../../constants";
 import banner from "../../../../assets/banner.png";
 
 import styles from "./styles.module.scss";
-import { PATHS } from "../../constants";
 
 function Header({ setVisible = null, isVisible = false }) {
   const navigate = useNavigate();
