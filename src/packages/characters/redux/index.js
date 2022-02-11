@@ -1,6 +1,10 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
-import { fetchPage } from "./rickandmortyAPI";
+import {
+  fetchCharacter,
+  fetchCharacterEpisodes,
+  fetchPage,
+} from "./rickandmortyAPI";
 
 export const STATE = {
   LOADING: "loading",
@@ -19,9 +23,24 @@ export const fetchByPage = createAsyncThunk(
   "characters/fetchByPageStatus",
   async (page) => {
     const response = await fetchPage(page);
-    console.log("response: ", response);
-    // The value we return becomes the `fulfilled` action payload
     return response;
+  }
+);
+
+export const fetchById = createAsyncThunk(
+  "characters/fetchByIdStatus",
+  async (id) => {
+    const character = await fetchCharacter(id);
+    const episodes = await fetchCharacterEpisodes(character.episode);
+
+    const itsArray = !!(episodes?.length >= 0);
+
+    if (itsArray) {
+      character.episodes = episodes;
+    } else {
+      character.episodes = [episodes];
+    }
+    return character;
   }
 );
 
@@ -36,13 +55,28 @@ export const charactersSlice = createSlice({
         state.status = STATE.LOADING;
       })
       .addCase(fetchByPage.fulfilled, (state, action) => {
-        console.log(action.payload);
         state.data = action.payload.results;
         state.error = null;
         state.info = action.payload.info;
         state.status = STATE.IDLE;
       })
       .addCase(fetchByPage.rejected, (state, action) => {
+        state.data = null;
+        state.error = action.error;
+        state.info = null;
+        state.status = STATE.ERROR;
+      })
+      .addCase(fetchById.pending, (state) => {
+        state.error = null;
+        state.status = STATE.LOADING;
+      })
+      .addCase(fetchById.fulfilled, (state, action) => {
+        state.data = action.payload;
+        state.error = null;
+        state.info = null;
+        state.status = STATE.IDLE;
+      })
+      .addCase(fetchById.rejected, (state, action) => {
         state.data = null;
         state.error = action.error;
         state.info = null;

@@ -1,0 +1,12 @@
+.mainContainer {
+  padding: 0 25%;
+  width: 100%;
+}
+
+.info {
+  display: flex;
+}
+
+.image {
+  margin-right: 30px;
+}

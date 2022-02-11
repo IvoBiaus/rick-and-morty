@@ -1,8 +1,10 @@
 .header {
-  padding: 0;
-  text-align: center;
+  padding: 5px;
+  display: flex;
+  justify-content: space-around;
 }
 
 .headerLogo {
   height: 100%;
+  cursor: pointer;
 }

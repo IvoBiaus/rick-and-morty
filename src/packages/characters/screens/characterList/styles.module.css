@@ -2,14 +2,6 @@
   height: 100%;
 }
 
-.header {
-  text-align: center;
-}
-
-.headerLogo {
-  height: 100%;
-}
-
 .content {
   align-items: center;
   display: flex;
@@ -24,4 +16,10 @@
   gap: 30px;
   justify-content: center;
   margin: 24px 16px;
+}
+
+.floatingButton {
+  position: absolute;
+  right: 80px;
+  bottom: 50px;
 }
